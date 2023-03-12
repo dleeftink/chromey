@@ -16,10 +16,6 @@
   "bugs": {
     "url": "https://github.com/Sparticuz/chromium/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Sparticuz/chromium.git"
-  },
   "license": "MIT",
   "author": {
     "name": "Kyle McNally"
@@ -32,8 +28,7 @@
     "build"
   ],
   "scripts": {
-    "build": "rm -rf build && tsc -p tsconfig.json",
-    "test": "make clean && make && make pretest && make test"
+    "build": "webpack"
   },
   "dependencies": {
     "browserfs": "^1.4.3",
@@ -46,7 +41,10 @@
     "@types/node": "^18.11.18",
     "@types/tar-fs": "^2.0.1",
     "clean-modules": "^2.0.6",
-    "typescript": "^4.9.4"
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1"
   },
   "engines": {
     "node": ">= 14.18.0"
