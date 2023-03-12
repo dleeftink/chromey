@@ -36,6 +36,7 @@
     "test": "make clean && make && make pretest && make test"
   },
   "dependencies": {
+    "browserfs": "^1.4.3",
     "follow-redirects": "^1.15.2",
     "tar-fs": "^2.1.1"
   },
