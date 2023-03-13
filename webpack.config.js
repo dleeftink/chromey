@@ -9,13 +9,13 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    // globalObject: 'this',
+    globalObject: 'this',
     library: {
       name: 'chromey',
-      type: "commonjs-module"
+      type: "umd"
     },
   },
-  target: 'web',
+  target: 'node',
   resolve: {
     modules: ['node_modules'],
     preferRelative: true,
