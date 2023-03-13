@@ -1,4 +1,5 @@
 const path = require('path');
+const { web } = require('webpack');
 const webpack = require('webpack');
 
 module.exports = {
@@ -12,26 +13,11 @@ module.exports = {
     // Use our versions of Node modules.
     alias: {
       fs: 'browserfs/dist/shims/fs.js',
-
       buffer: 'browserfs/dist/shims/buffer.js',
-
       path: 'browserfs/dist/shims/path.js',
-
       processGlobal: 'browserfs/dist/shims/process.js',
-
       bufferGlobal: 'browserfs/dist/shims/bufferGlobal.js',
       bfsGlobal: require.resolve('browserfs'),
-    },
-    fallback: {
-      fs: 'browserfs/dist/shims/fs.js',
-
-      buffer: 'browserfs/dist/shims/buffer.js',
-
-      path: 'browserfs/dist/shims/path.js',
-
-      process: 'browserfs/dist/shims/process.js',
-
-      Buffer: 'browserfs/dist/shims/bufferGlobal.js',
     },
   },
   // REQUIRED to avoid issue "Uncaught TypeError: BrowserFS.BFSRequire is not a function"
@@ -55,37 +41,7 @@ module.exports = {
       process: 'processGlobal',
       Buffer: 'bufferGlobal',
     }),
-    new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
-      const mod = resource.request.replace(/^node:/, '');
-      switch (mod) {
-        case 'fs':
-          resource.request = 'fs';
-          break;
-        case 'buffer':
-          resource.request = 'buffer';
-          break;
-        case 'path':
-          resource.request = 'path';
-          break;
-        case 'process':
-          resource.request = 'processGlobal';
-          break;
-        case 'http':
-          resource.request = 'http';
-          break;
-        case 'os':
-          resource.request = 'os';
-          break;
-        case 'url':
-          resource.request = 'url';
-          break;
-        case 'zlib':
-          resource.request = 'zlib';
-          break;
-        default:
-          throw new Error(`Not found ${mod}`);
-      }
-    }),
+  
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
   node: false,
