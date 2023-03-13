@@ -7,9 +7,11 @@ import { join } from 'node:path';
 import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
-/*import * as BrowserFS from 'browserfs';
 
 (window as any).global = window;
+
+/*import * as BrowserFS from 'browserfs';
+
 
 BrowserFS.install(window);
 
