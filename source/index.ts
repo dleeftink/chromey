@@ -1,4 +1,4 @@
-import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
+// import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
 import { IncomingMessage } from 'node:http';
 import LambdaFS from './lambdafs';
 import { join } from 'node:path';
@@ -6,6 +6,9 @@ import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
 const BrowserFS = require('browserfs');
+const { access, createWriteStream, existsSync, mkdirSync, symlink } = BrowserFS.BFSRequire('fs');
+
+BrowserFS.configure({ fs: "LocalStorage" })
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
