@@ -258,12 +258,11 @@ class Chromium {
 
 //console.log(new Chromium())
 
-//export = Chromium
+export = Chromium
 //export = {
 //  Chromium: new Chromium()
 //}
 
-export { 
+/*export { 
   Chromium,
-  this
-};
+};*/
