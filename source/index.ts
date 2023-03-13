@@ -9,7 +9,7 @@ import { downloadAndExtract, isValidUrl } from './helper';
 
 import * as BrowserFS from 'browserfs';
 
-const global = globalThis
+(window as any).global = window;
 
 BrowserFS.install(window);
 
