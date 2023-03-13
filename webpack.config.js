@@ -6,14 +6,13 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: './source/index.ts',
-  experiments: {
-    outputModule: true,
-  },
+
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     library: {
-      type: 'module',
+      name: 'chromey',
+      type: "commonjs2"
     },
   },
   target: 'web',
