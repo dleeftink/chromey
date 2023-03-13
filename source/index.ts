@@ -1,13 +1,13 @@
 // @ts-nocheck
 
-// import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
+import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
 import { IncomingMessage } from 'node:http';
 import LambdaFS from './lambdafs';
-// import { join } from 'node:path';
+import { join } from 'node:path';
 import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
-import * as BrowserFS from 'browserfs';
+/*import * as BrowserFS from 'browserfs';
 
 // (window as any).global = window; 
 
@@ -19,7 +19,9 @@ const { join } = BrowserFS.BFSRequire('path');
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('ran at: ', 1939)
-})
+})*/
+
+console.log('ran at: ', 1944)
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
