@@ -8,7 +8,8 @@ import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
 
-(window as any).global = window;
+const global = globalThis;
+//(window as any).global = window;
 
 /*import * as BrowserFS from 'browserfs';
 
