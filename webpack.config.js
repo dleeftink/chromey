@@ -11,10 +11,10 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    globalObject: 'this',
+    // globalObject: 'this',
     library: {
       name: 'chromey',
-      type: 'umd',
+      type: 'var',
     },
     // module: true
   },
