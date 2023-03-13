@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
+// import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
 import { IncomingMessage } from 'node:http';
 import LambdaFS from './lambdafs';
 import { join } from 'node:path';
@@ -12,6 +12,8 @@ import * as BrowserFS from 'browserfs';
 (window as any).global = window; 
 
 BrowserFS.install(global);
+
+const { access,createWriteStream, existsSync, mkdirSync, symlink } = BrowserFS.BFSRequire('fs');
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('configured', LambdaFS)
