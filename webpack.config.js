@@ -26,8 +26,9 @@ module.exports = {
     // preferRelative: true,
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
-    /* fallback: {
-      assert: require.resolve("assert"), // has /
+    fallback: {
+      fs: require.resolve("browserify-fs")
+      /*assert: require.resolve("assert"), // has /
       constants : require.resolve("constants-browserify"),
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
@@ -35,16 +36,16 @@ module.exports = {
       stream: require.resolve('stream-browserify'),
       url: require.resolve('url'), // has /
       util: require.resolve("util"), // has /
-      zlib: require.resolve("browserify-zlib")
-    },*/
-    alias: {
+      zlib: require.resolve("browserify-zlib")*/
+    },
+    /*alias: {
       fs: 'browserfs/dist/shims/fs.js',
       buffer: 'browserfs/dist/shims/buffer.js',
       path: 'browserfs/dist/shims/path.js',
       processGlobal: 'browserfs/dist/shims/process.js',
       bufferGlobal: 'browserfs/dist/shims/bufferGlobal.js',
       bfsGlobal: require.resolve('browserfs'),
-    },
+    },*/
   },
   // REQUIRED to avoid issue "Uncaught TypeError: BrowserFS.BFSRequire is not a function"
   // See: https://github.com/jvilk/BrowserFS/issues/201
@@ -70,13 +71,13 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
-    new webpack.ProvidePlugin({
+    /*new webpack.ProvidePlugin({
       BrowserFS: 'bfsGlobal',
       process: 'processGlobal',
       Buffer: 'bufferGlobal',
-    }),
+    }),*/
     new NodePolyfillPlugin({
-      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
+      //excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
