@@ -9,7 +9,6 @@ import { downloadAndExtract, isValidUrl } from './helper';
 
 import * as BrowserFS from 'browserfs';
 
-
 BrowserFS.install(window);
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
@@ -256,5 +255,5 @@ class Chromium {
   }
 }
 
-//export Chromium
-export default Chromium;
+export Chromium
+//export default Chromium;
