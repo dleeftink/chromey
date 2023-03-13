@@ -33,7 +33,6 @@
   "dependencies": {
     "browserfs": "^1.4.3",
     "follow-redirects": "^1.15.2",
-    "node-polyfill-webpack-plugin": "^2.0.1",
     "tar-fs": "^2.1.1"
   },
   "devDependencies": {
@@ -42,6 +41,7 @@
     "@types/node": "^18.11.18",
     "@types/tar-fs": "^2.0.1",
     "clean-modules": "^2.0.6",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
     "webpack": "^5.76.1",
