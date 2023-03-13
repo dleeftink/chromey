@@ -22,7 +22,7 @@ module.exports = {
   target: 'web',
   resolve: {
     modules: ['node_modules'],
-    preferRelative: true,
+    // preferRelative: true,
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
     /* fallback: {
