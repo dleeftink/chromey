@@ -1,9 +1,15 @@
-import { unlink } from "node:fs";
+//import { unlink } from "node:fs";
 import { https } from "follow-redirects";
 import { tmpdir } from "node:os";
 import { extract } from "tar-fs";
 import { parse } from "node:url";
 import type { UrlWithStringQuery } from "node:url";
+
+import * as BrowserFS from 'browserfs';
+
+const fs = BrowserFS.BFSRequire('fs');
+
+const { unlink } = fs;
 
 interface FollowRedirOptions extends UrlWithStringQuery {
   maxBodyLength: number;

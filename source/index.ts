@@ -9,7 +9,7 @@ import { downloadAndExtract, isValidUrl } from './helper';
 
 import * as BrowserFS from 'browserfs';
 
-(window as any).global = window; 
+// (window as any).global = window; 
 
 BrowserFS.install(global);
 
@@ -18,7 +18,7 @@ const { access,createWriteStream, existsSync, mkdirSync, symlink } = fs;
 const { join } = BrowserFS.BFSRequire('path');
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
-  console.log('ran at: ', 1918)
+  console.log('ran at: ', 1928)
 })
 
 fs.writeFile('/hmm.txt', 'Flat file', function(err) {
