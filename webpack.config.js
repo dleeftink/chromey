@@ -5,16 +5,19 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: './source/index.ts',
-
+  experiments: {
+    outputModule:true
+  },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    //globalObject: 'this',
+    globalObject: 'this',
     library: {
       name: 'chromey',
-      type: "umd"
+      type: "commonjs-module"
     },
-    libraryExport: 'default'
+    libraryExport: 'default',
+    module: true
   },
   target: 'web',
   resolve: {
