@@ -1,8 +1,18 @@
-import { createReadStream, createWriteStream, existsSync } from 'node:fs';
+// @ts-nocheck
+
+import { createReadStream, createWriteStream, existsSync, exists } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { extract } from 'tar-fs';
 import { createBrotliDecompress, createUnzip } from 'node:zlib';
+
+function existsAsync(path) {
+  return new Promise(function(resolve, reject){
+    exists(path, function(exists){
+      resolve(exists);
+    })
+  })
+}
 
 class LambdaFS {
   /**
@@ -13,13 +23,13 @@ class LambdaFS {
   static inflate(filePath: string): Promise<string> {
     const output = filePath.includes("swiftshader") ? tmpdir() : join(tmpdir(), basename(filePath).replace(/[.](?:t(?:ar(?:[.](?:br|gz))?|br|gz)|br|gz)$/i, ''));
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (filePath.includes("swiftshader")) {
-        if (existsSync(`${output}/libGLESv2.so`)) {
+        if (await existsAsync(`${output}/libGLESv2.so`)) {
           return resolve(output);
         }
       } else {
-        if (existsSync(output) === true) {
+        if (await existsAsync(output) === true) {
           return resolve(output);
         }
       }

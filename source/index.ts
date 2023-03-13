@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
+import { access, createWriteStream, existsSync, exists, mkdirSync, symlink } from 'node:fs';
 import { IncomingMessage } from 'node:http';
 import LambdaFS from './lambdafs';
 import { join } from 'node:path';
@@ -21,7 +21,7 @@ BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('ran at: ', 1939)
 })*/
 
-console.log('ran at: ', 1944)
+console.log('ran at: ', 2013)
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
@@ -68,12 +68,20 @@ if ( process.env.AWS_EXECUTION_ENV !== undefined && /^AWS_Lambda_nodejs(?:14|16|
   }
 }
 
+function existsAsync(path) {
+  return new Promise(function(resolve, reject){
+    exists(path, function(exists){
+      resolve(exists);
+    })
+  })
+}
+
 class Chromium {
   /**
    * Downloads or symlinks a custom font and returns its basename, patching the environment so that Chromium can find it.
    * If headless is not true, `null` is returned instead.
    */
-  static font(input: string): Promise<string | null> {
+  static async font(input: string): Promise<string | null> {
     if (Chromium.headless !== true) {
       return new Promise((resolve) => {
         return resolve(null);
@@ -84,11 +92,11 @@ class Chromium {
       process.env.HOME = '/tmp';
     }
 
-    if (existsSync(`${process.env.HOME}/.fonts`) !== true) {
+    if (await existsAsync(`${process.env.HOME}/.fonts`) !== true) {
       mkdirSync(`${process.env.HOME}/.fonts`);
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (/^https?:[/][/]/i.test(input) !== true) {
         input = `file://${input}`;
       }
@@ -96,7 +104,7 @@ class Chromium {
       const url = new URL(input);
       const output = `${process.env.HOME}/.fonts/${url.pathname.split('/').pop()}`;
 
-      if (existsSync(output) === true) {
+      if (await existsAsync(output) === true) {
         return resolve(output.split('/').pop() as string);
       }
 
@@ -205,7 +213,7 @@ class Chromium {
     /**
      * If the `chromium` binary already exists in /tmp/chromium, return it.
      */
-    if (existsSync('/tmp/chromium') === true) {
+    if (await existsAsync('/tmp/chromium') === true) {
       return Promise.resolve('/tmp/chromium');
     }
 
@@ -222,7 +230,7 @@ class Chromium {
     /**
      * If the input directory doesn't exist, throw an error.
      */
-    if (!existsSync(input)) {
+    if (!(await existsAsync(input))) {
       throw new Error(`The input directory "${input}" does not exist.`);
     }
 
