@@ -25,7 +25,7 @@ module.exports = {
     preferRelative: true,
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
-     fallback: {
+    /* fallback: {
       assert: require.resolve("assert"), // has /
       constants : require.resolve("constants-browserify"),
       http: require.resolve('stream-http'),
@@ -35,7 +35,7 @@ module.exports = {
       url: require.resolve('url'), // has /
       util: require.resolve("util"), // has /
       zlib: require.resolve("browserify-zlib")
-    },
+    },*/
     alias: {
       fs: 'browserfs/dist/shims/fs.js',
       buffer: 'browserfs/dist/shims/buffer.js',
@@ -69,7 +69,7 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
-    // new NodePolyfillPlugin(),
+    new NodePolyfillPlugin(),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
   node: false,
