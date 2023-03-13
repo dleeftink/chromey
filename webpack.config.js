@@ -1,6 +1,7 @@
 const path = require('path');
 const { web } = require('webpack');
 const webpack = require('webpack');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -9,8 +10,23 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  target: "web",
   resolve: {
+    modules: ['node_modules'],
+    preferRelative:true,
+    extensions: ['.ts','.tsx','.js','.jsx'],
     // Use our versions of Node modules.
+   /* fallback: {
+      assert: require.resolve("assert/"),
+      constants : require.resolve("constants-browserify"),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      stream: require.resolve('stream-browserify'),
+      url: require.resolve('url/'),
+      util: require.resolve("util/"),
+      zlib: require.resolve("browserify-zlib")
+    },*/
     alias: {
       fs: 'browserfs/dist/shims/fs.js',
       buffer: 'browserfs/dist/shims/buffer.js',
@@ -41,6 +57,10 @@ module.exports = {
       process: 'processGlobal',
       Buffer: 'bufferGlobal',
     }),
+    new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
+      resource.request = resource.request.replace(/^node:/, "");
+    }),
+    new NodePolyfillPlugin()
   
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
