@@ -8,7 +8,7 @@ module.exports = {
   // experiments: {
   //  outputModule:true
   // },
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
