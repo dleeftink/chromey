@@ -257,7 +257,7 @@ class Chromium {
 console.log(new Chromium())
 
 //export = Chromium
-module.exports = {
-  Chromium
+export = {
+  Chromium: new Chromium()
 }
 // export default { Chromium };
