@@ -15,7 +15,7 @@ module.exports = {
     // globalObject: 'this',
     library: {
       name: 'chromey',
-      type: 'commonjs',
+      type: 'var',
      // export: 'default',
     },
    // module: true
