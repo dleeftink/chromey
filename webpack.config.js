@@ -76,7 +76,7 @@ module.exports = {
       // Buffer: 'bufferGlobal',
     }),
     new NodePolyfillPlugin({
-      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
+      excludeAliases: ['fs', 'buffer', 'path'],
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
