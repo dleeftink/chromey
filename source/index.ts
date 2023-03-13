@@ -7,7 +7,6 @@ import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
 const BrowserFS = require('browserfs');
-
 BrowserFS.configure({ fs: "LocalStorage" })
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
