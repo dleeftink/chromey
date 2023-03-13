@@ -20,7 +20,6 @@
   "author": {
     "name": "Kyle McNally"
   },
-  "type": "commonjs",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
