@@ -254,7 +254,7 @@ class Chromium {
   }
 }
 
-console.log(new Chromium())
+console.log(Object.getOwnPropertyDescriptors(new Chromium()))
 
 // export = Chromium
 // export default { Chromium };
