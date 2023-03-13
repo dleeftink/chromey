@@ -12,11 +12,11 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-     globalObject: 'this',
+    globalObject: 'this',
     library: {
       name: 'chromey',
       type: 'commonjs',
-      //export: 'default',
+      export: 'default',
     },
     // module: true
   },
@@ -56,6 +56,15 @@ module.exports = {
         test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
+        options: {
+          presets: [
+            ['@babel/preset-env', { targets: 'defaults' }]
+          ],
+          plugins: [
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-transform-modules-commonjs',
+          ],
+        },
       },
       {
         test: /\.tsx?$/,
@@ -77,9 +86,11 @@ module.exports = {
       Buffer: 'bufferGlobal',
     }),
     new NodePolyfillPlugin({
-       excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
+      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
-  node: false,
+  node: {
+    global:true,
+  }
 };

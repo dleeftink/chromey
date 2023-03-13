@@ -256,4 +256,4 @@ class Chromium {
 }
 
 // export = Chromium
-export { Chromium };
+module.exports = { Chromium };
