@@ -12,7 +12,7 @@ import * as BrowserFS from 'browserfs';
 BrowserFS.install(window);
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
-  console.log('configured', BrowserFS)
+  console.log('configured', LambdaFS)
 })
 
 
