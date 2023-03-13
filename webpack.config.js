@@ -52,6 +52,11 @@ module.exports = {
     noParse: /browserfs\.js/,
     rules: [
       {
+        test: /\.(js|jsx|tsx|ts)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
@@ -73,8 +78,7 @@ module.exports = {
     new NodePolyfillPlugin({
       excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
     }),
-
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
-  node: false
+  node: false,
 };
