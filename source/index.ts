@@ -254,5 +254,10 @@ class Chromium {
   }
 }
 
-export = Chromium
-//export default { Chromium };
+console.log(new Chromium())
+
+// export = Chromium
+// export default { Chromium };
+module.exports = {
+  Chromium
+}
