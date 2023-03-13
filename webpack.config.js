@@ -14,13 +14,13 @@ module.exports = {
     globalObject: 'this',
     library: {
       name: 'chromey',
-      type: 'var',
+      type: 'umd',
     },
     // module: true
   },
   target: 'web',
   resolve: {
-    modules: ['node_modules'],
+    // modules: ['node_modules'],
     // preferRelative: true,
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
@@ -73,5 +73,5 @@ module.exports = {
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
-  node: { global: true },
+  node: false
 };
