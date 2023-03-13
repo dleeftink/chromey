@@ -55,15 +55,15 @@ module.exports = {
       {
         test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
-        options: {
-          presets: [
-            ['@babel/preset-env', { targets: 'defaults' }]
-          ],
-          plugins: [
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-transform-modules-commonjs',
-          ],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-modules-commonjs',
+            ],
+          },
         },
       },
       {
@@ -91,6 +91,6 @@ module.exports = {
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
   node: {
-    global:true,
-  }
+    global: true,
+  },
 };

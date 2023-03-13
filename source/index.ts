@@ -12,7 +12,7 @@ import * as BrowserFS from 'browserfs';
 BrowserFS.install(window);
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
-  console.log('configured',e)
+  console.log('configured', BrowserFS)
 })
 
 
@@ -256,4 +256,4 @@ class Chromium {
 }
 
 // export = Chromium
-module.exports = { Chromium };
+export = Chromium ;
