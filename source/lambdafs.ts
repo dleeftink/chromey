@@ -4,7 +4,11 @@ import { createReadStream, createWriteStream, existsSync, exists } from 'node:fs
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { extract } from 'tar-fs';
-import { createBrotliDecompress, createUnzip } from 'node:zlib';
+import { /*createBrotliDecompress,*/ createUnzip } from 'node:zlib';
+
+import { decompress } from 'brotli-compress/js'
+
+
 
 function existsAsync(path) {
   return new Promise(function(resolve, reject){
@@ -60,7 +64,9 @@ class LambdaFS {
       });
 
       if (/(?:br|gz)$/i.test(filePath) === true) {
-        source.pipe(/br$/i.test(filePath) ? createBrotliDecompress({ chunkSize: 2 ** 21 }) : createUnzip({ chunkSize: 2 ** 21 })).pipe(target);
+        source.pipe(/br$/i.test(filePath) 
+          ? (e)=>decompress(e) //createBrotliDecompress({ chunkSize: 2 ** 21 }) 
+          : createUnzip({ chunkSize: 2 ** 21 })).pipe(target);
       } else {
         source.pipe(target);
       }
