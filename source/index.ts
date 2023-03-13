@@ -16,7 +16,7 @@ BrowserFS.install(global);
 const { access,createWriteStream, existsSync, mkdirSync, symlink } = BrowserFS.BFSRequire('fs');
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
-  console.log('configured', LambdaFS)
+  console.log('configured at: ', process.hrtime(time))
 })
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
