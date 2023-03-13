@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
+const BrowserFS = require('browserfs');
+
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
   /**

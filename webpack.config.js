@@ -1,5 +1,4 @@
 const path = require('path');
-const { web } = require('webpack');
 const webpack = require('webpack');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
