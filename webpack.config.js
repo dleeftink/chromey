@@ -12,7 +12,7 @@ module.exports = {
     globalObject: 'this',
     library: {
       name: 'chromey',
-      type: "var"
+      type: "commonjs"
     },
   },
   target: 'web',

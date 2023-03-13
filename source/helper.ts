@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { unlink } from "node:fs";
 import { https } from "follow-redirects";
 import { tmpdir } from "node:os";
