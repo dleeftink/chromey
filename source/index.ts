@@ -18,11 +18,11 @@ const { access,createWriteStream, existsSync, mkdirSync, symlink } = fs;
 const { join } = BrowserFS.BFSRequire('path');
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
-  console.log('ran at: ', 1910)
+  console.log('ran at: ', 1918)
 })
 
-fs.writeFile('/test.txt', 'Cool, I can do this in the browser!', function(err) {
-  fs.readFile('/test.txt', function(err, contents) {
+fs.writeFile('/hmm.txt', 'Flat file', function(err) {
+  fs.readFile('/hmm.txt', function(err, contents) {
     console.log(contents.toString());
   });
 });
