@@ -69,7 +69,9 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
-    new NodePolyfillPlugin(),
+    new NodePolyfillPlugin({
+      excludeAliases: ['fs','buffer','path']
+    }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
   node: false,
