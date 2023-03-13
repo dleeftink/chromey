@@ -27,7 +27,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
     fallback: {
-      fs: require.resolve("browserify-fs")
+      fs: require.resolve("browserify-fs"),
      /* assert: require.resolve("assert"), // has /
       constants : require.resolve("constants-browserify"),
       http: require.resolve('stream-http'),
@@ -35,8 +35,8 @@ module.exports = {
       os: require.resolve('os-browserify/browser'),
       stream: require.resolve('stream-browserify'),
       url: require.resolve('url'), // has /
-      util: require.resolve("util"), // has /
-      zlib: require.resolve("browserify-zlib")*/
+      util: require.resolve("util"), // has */
+      zlib: require.resolve("browserify-zlib")
     },
     alias: {
       //fs: 'browserfs/dist/shims/fs.js',
