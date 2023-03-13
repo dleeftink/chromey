@@ -4,8 +4,7 @@
     "declaration": true,
     "lib": ["dom"],
     "outDir": "build",
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es5"
   },
   "include": ["source"]
 }
