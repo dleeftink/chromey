@@ -42,7 +42,7 @@ module.exports = {
       buffer: 'browserfs/dist/shims/buffer.js',
       path: 'browserfs/dist/shims/path.js',
       processGlobal: 'browserfs/dist/shims/process.js',
-      // bufferGlobal: 'browserfs/dist/shims/bufferGlobal.js',
+      bufferGlobal: 'browserfs/dist/shims/bufferGlobal.js',
       bfsGlobal: require.resolve('browserfs'),
     },
   },
@@ -70,13 +70,13 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
+    new NodePolyfillPlugin({
+      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
+    }),
     new webpack.ProvidePlugin({
       BrowserFS: 'bfsGlobal',
       process: 'processGlobal',
-      // Buffer: 'bufferGlobal',
-    }),
-    new NodePolyfillPlugin({
-      excludeAliases: ['fs', 'path'],
+      Buffer: 'bufferGlobal',
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
