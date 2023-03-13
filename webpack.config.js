@@ -73,5 +73,5 @@ module.exports = {
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
-  node: false,
+  // node: false,
 };
