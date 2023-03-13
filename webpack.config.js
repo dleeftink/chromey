@@ -5,9 +5,9 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: './source/index.ts',
-  experiments: {
-    outputModule:true
-  },
+  //experiments: {
+  //  outputModule:true
+  //},
   // devtool: 'inline-source-map',
   output: {
     filename: 'main.js',
@@ -18,7 +18,7 @@ module.exports = {
       type: 'commonjs2',
       //export: 'default',
     },
-    module: true
+   // module: true
   },
   target: 'web',
   resolve: {
