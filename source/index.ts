@@ -9,7 +9,7 @@ import { downloadAndExtract, isValidUrl } from './helper';
 
 import * as BrowserFS from 'browserfs';
 
-BrowserFS.install(window);
+BrowserFS.install(global);
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('configured', LambdaFS)
