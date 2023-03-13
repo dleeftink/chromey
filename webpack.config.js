@@ -19,7 +19,7 @@ module.exports = {
     },
     // module: true
   },
-  target: 'node',
+  target: 'web',
   resolve: {
     // modules: ['node_modules'],
     // preferRelative: true,
