@@ -15,7 +15,6 @@ BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('configured', LambdaFS)
 })
 
-
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
   /**
@@ -255,5 +254,5 @@ class Chromium {
   }
 }
 
-// export = Chromium
-export default { Chromium };
+export = Chromium
+//export default { Chromium };

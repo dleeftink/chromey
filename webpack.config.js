@@ -16,7 +16,7 @@ module.exports = {
     library: {
       name: 'chromey',
       type: 'commonjs2',
-      export: 'default',
+     // export: 'default',
     },
     // module: true
   },
