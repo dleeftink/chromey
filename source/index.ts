@@ -254,10 +254,10 @@ class Chromium {
   }
 }
 
-console.log(new Chromium())
+//console.log(new Chromium())
 
 //export = Chromium
-export = {
-  Chromium: new Chromium()
-}
-// export default { Chromium };
+//export = {
+//  Chromium: new Chromium()
+//}
+export { Chromium };
