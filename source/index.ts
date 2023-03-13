@@ -13,12 +13,19 @@ import * as BrowserFS from 'browserfs';
 
 BrowserFS.install(global);
 
-const { access,createWriteStream, existsSync, mkdirSync, symlink } = BrowserFS.BFSRequire('fs');
+const fs = BrowserFS.BFSRequire('fs');
+const { access,createWriteStream, existsSync, mkdirSync, symlink } = fs;
 const { join } = BrowserFS.BFSRequire('path');
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
-  console.log('ran at: ', 1904)
+  console.log('ran at: ', 1910)
 })
+
+fs.writeFile('/test.txt', 'Cool, I can do this in the browser!', function(err) {
+  fs.readFile('/test.txt', function(err, contents) {
+    console.log(contents.toString());
+  });
+});
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
