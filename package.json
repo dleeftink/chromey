@@ -31,10 +31,19 @@
     "build": "webpack"
   },
   "dependencies": {
+    "assert": "^2.0.0",
     "browserfs": "^1.4.3",
+    "browserify-zlib": "^0.2.0",
+    "constants-browserify": "^1.0.0",
     "follow-redirects": "^1.15.2",
+    "https-browserify": "^1.0.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
-    "tar-fs": "^2.1.1"
+    "os-browserify": "^0.3.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "tar-fs": "^2.1.1",
+    "url": "^0.11.0",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.3",
