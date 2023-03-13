@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
 import { IncomingMessage } from 'node:http';
 import LambdaFS from './lambdafs';

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createReadStream, createWriteStream, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';

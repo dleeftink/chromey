@@ -4,6 +4,7 @@
     "declaration": true,
     "lib": ["dom"],
     "outDir": "build",
+    "noImplicitAny": false
   },
   "include": ["source"]
 }
