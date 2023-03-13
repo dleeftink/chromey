@@ -12,15 +12,17 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    module: true,
+    library: {
+      type: 'module',
+    },
   },
-  target: "web",
+  target: 'web',
   resolve: {
     modules: ['node_modules'],
-    preferRelative:true,
-    extensions: ['.ts','.tsx','.js','.jsx'],
+    preferRelative: true,
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
-   /* fallback: {
+    /* fallback: {
       assert: require.resolve("assert/"), // has /
       constants : require.resolve("constants-browserify"),
       http: require.resolve('stream-http'),
@@ -62,10 +64,9 @@ module.exports = {
       Buffer: 'bufferGlobal',
     }),
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
-      resource.request = resource.request.replace(/^node:/, "");
+      resource.request = resource.request.replace(/^node:/, '');
     }),
-    new NodePolyfillPlugin()
-  
+    new NodePolyfillPlugin(),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
   node: false,
