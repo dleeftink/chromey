@@ -262,4 +262,5 @@ class Chromium {
 //export = {
 //  Chromium: new Chromium()
 //}
-export { Chromium };
+
+export = Chromium;
