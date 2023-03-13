@@ -14,8 +14,9 @@ module.exports = {
       name: 'chromey',
       type: "umd"
     },
+    libraryExport: 'default'
   },
-  target: 'node',
+  target: 'web',
   resolve: {
     modules: ['node_modules'],
     preferRelative: true,
