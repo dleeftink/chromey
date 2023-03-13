@@ -7,18 +7,14 @@ import { join } from 'node:path';
 import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
-
-const global = globalThis;
-//(window as any).global = window;
-
-/*import * as BrowserFS from 'browserfs';
+import * as BrowserFS from 'browserfs';
 
 
 BrowserFS.install(window);
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('configured',e)
-})*/
+})
 
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
