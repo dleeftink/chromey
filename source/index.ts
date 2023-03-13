@@ -255,4 +255,4 @@ class Chromium {
 }
 
 //export Chromium
-export = Chromium;
+export default Chromium;
