@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
+
 module.exports = {
   mode: 'production',
   entry: './source/index.ts',
@@ -11,10 +12,11 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-     globalObject: 'this',
+    globalObject: 'this',
     library: {
       name: 'chromey',
-      type: 'umd',
+      type: 'var',
+      export: 'default',
     },
     // module: true
   },
