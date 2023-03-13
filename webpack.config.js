@@ -36,7 +36,7 @@ module.exports = {
       util: require.resolve("util"), // has /
       zlib: require.resolve("browserify-zlib")
     },*/
-    alias: {
+    fallback: {
       fs: 'browserfs/dist/shims/fs.js',
       buffer: 'browserfs/dist/shims/buffer.js',
       path: 'browserfs/dist/shims/path.js',
@@ -61,16 +61,16 @@ module.exports = {
     // Expose BrowserFS, process, and Buffer globals.
     // NOTE: If you intend to use BrowserFS in a script tag, you do not need
     // to expose a BrowserFS global.
-    new webpack.ProvidePlugin({
-      BrowserFS: 'bfsGlobal',
-      process: 'processGlobal',
-      Buffer: 'bufferGlobal',
-    }),
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
     new NodePolyfillPlugin({
-      excludeAliases: ['fs','buffer','path']
+      excludeAliases: ['fs','buffer','path','Buffer']
+    }),
+    new webpack.ProvidePlugin({
+      BrowserFS: 'bfsGlobal',
+      process: 'processGlobal',
+      Buffer: 'bufferGlobal',
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
