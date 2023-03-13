@@ -70,13 +70,13 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
-    new NodePolyfillPlugin({
-      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
-    }),
     new webpack.ProvidePlugin({
       BrowserFS: 'bfsGlobal',
       process: 'processGlobal',
       Buffer: 'bufferGlobal',
+    }),
+    new NodePolyfillPlugin({
+      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
