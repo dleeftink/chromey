@@ -12,12 +12,11 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     globalObject: 'this',
-    //library: {
-    //  name: 'chromey',
-    //  type: "commonjs"
-    //},
-     library: 'commonjs'
-  // module: true
+    library: {
+      name: 'chromey',
+      type: 'commonjs',
+    },
+    // module: true
   },
   target: 'web',
   resolve: {
@@ -65,7 +64,7 @@ module.exports = {
       resource.request = resource.request.replace(/^node:/, '');
     }),
     new NodePolyfillPlugin({
-      excludeAliases: ['fs','buffer','path','Buffer']
+      excludeAliases: ['fs', 'buffer', 'path', 'Buffer'],
     }),
     new webpack.ProvidePlugin({
       BrowserFS: 'bfsGlobal',
@@ -74,5 +73,5 @@ module.exports = {
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
-  node: false
+  node: { global: true },
 };
