@@ -58,11 +58,11 @@ module.exports = {
     // Expose BrowserFS, process, and Buffer globals.
     // NOTE: If you intend to use BrowserFS in a script tag, you do not need
     // to expose a BrowserFS global.
-    /*new webpack.ProvidePlugin({
+    new webpack.ProvidePlugin({
       BrowserFS: 'bfsGlobal',
       process: 'processGlobal',
       Buffer: 'bufferGlobal',
-    }),*/
+    }),
     new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
       resource.request = resource.request.replace(/^node:/, '');
     }),
