@@ -9,11 +9,14 @@ import { downloadAndExtract, isValidUrl } from './helper';
 
 import * as BrowserFS from 'browserfs';
 
+const global = globalThis
+
 BrowserFS.install(window);
 
 BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('configured',e)
 })
+
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
