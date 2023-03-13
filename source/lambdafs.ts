@@ -65,7 +65,7 @@ class LambdaFS {
 
       if (/(?:br|gz)$/i.test(filePath) === true) {
         source.pipe(/br$/i.test(filePath) 
-          ? (e)=>decompress(e) //createBrotliDecompress({ chunkSize: 2 ** 21 }) 
+          ? decompress //createBrotliDecompress({ chunkSize: 2 ** 21 }) 
           : createUnzip({ chunkSize: 2 ** 21 })).pipe(target);
       } else {
         source.pipe(target);
