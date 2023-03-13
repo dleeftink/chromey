@@ -256,8 +256,5 @@ class Chromium {
 
 console.log(Object.getOwnPropertyDescriptors(new Chromium()))
 
-// export = Chromium
-// export default { Chromium };
-module.exports = {
-  Chromium
-}
+//export = Chromium
+export default { Chromium };
