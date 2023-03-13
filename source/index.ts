@@ -1,3 +1,4 @@
+// @ts-nocheck
 
 import { access, createWriteStream, existsSync, mkdirSync, symlink } from 'node:fs';
 import { IncomingMessage } from 'node:http';
@@ -6,11 +7,13 @@ import { join } from 'node:path';
 import { URL } from 'node:url';
 import { downloadAndExtract, isValidUrl } from './helper';
 
-const BrowserFS = require('browserfs');
+import * as BrowserFS from 'browserfs';
 
 BrowserFS.install(window);
 
-BrowserFS.configure({ fs: "LocalStorage" })
+BrowserFS.configure({ fs: "LocalStorage" }, function(e){
+  console.log('configured',e)
+})
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
@@ -251,5 +254,5 @@ class Chromium {
   }
 }
 
-//export default Chromium
-export = Chromium;
+export default Chromium
+// export = Chromium;

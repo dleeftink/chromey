@@ -11,10 +11,10 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    globalObject: 'this',
+    //globalObject: 'this',
     library: {
       name: 'chromey',
-      type: "commonjs-module"
+      type: "commonjs"
     },
     libraryExport: 'default',
     module: true
@@ -36,7 +36,7 @@ module.exports = {
       util: require.resolve("util"), // has /
       zlib: require.resolve("browserify-zlib")
     },*/
-    fallback: {
+    alias: {
       fs: 'browserfs/dist/shims/fs.js',
       buffer: 'browserfs/dist/shims/buffer.js',
       path: 'browserfs/dist/shims/path.js',
