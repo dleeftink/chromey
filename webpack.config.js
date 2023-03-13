@@ -5,23 +5,24 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: './source/index.ts',
-  experiments: {
-    outputModule:true
-  },
+  // experiments: {
+  //  outputModule:true
+  // },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     globalObject: 'this',
-    library: {
-      name: 'chromey',
-      type: "commonjs"
-    },
-    module: true
+    //library: {
+    //  name: 'chromey',
+    //  type: "commonjs"
+    //},
+     library: 'commonjs'
+  // module: true
   },
   target: 'web',
   resolve: {
     modules: ['node_modules'],
-    preferRelative: true,
+    // preferRelative: true,
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // Use our versions of Node modules.
     /* fallback: {
@@ -73,5 +74,5 @@ module.exports = {
     }),
   ],
   // DISABLE Webpack's built-in process and Buffer polyfills!
-   node: false,
+  node: false
 };
