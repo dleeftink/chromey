@@ -6,9 +6,13 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: './source/index.ts',
+  experiments: {
+    outputModule: true,
+  },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    module: true,
   },
   target: "web",
   resolve: {
@@ -17,14 +21,14 @@ module.exports = {
     extensions: ['.ts','.tsx','.js','.jsx'],
     // Use our versions of Node modules.
    /* fallback: {
-      assert: require.resolve("assert/"),
+      assert: require.resolve("assert/"), // has /
       constants : require.resolve("constants-browserify"),
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
       os: require.resolve('os-browserify/browser'),
       stream: require.resolve('stream-browserify'),
-      url: require.resolve('url/'),
-      util: require.resolve("util/"),
+      url: require.resolve('url/'), // has /
+      util: require.resolve("util/"), // has /
       zlib: require.resolve("browserify-zlib")
     },*/
     alias: {
