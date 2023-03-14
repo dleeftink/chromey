@@ -6,7 +6,7 @@ import { basename, join } from 'node:path';
 import { extract } from 'tar-fs';
 import { /*createBrotliDecompress,*/ createUnzip } from 'node:zlib';
 
-import { decompress } from 'brotli-compress/js'
+import { decompressBrotli } from 'brotli-compress/js'
 import { Transform } from 'stream'; 
 
 function existsAsync(path) {
@@ -20,7 +20,7 @@ function existsAsync(path) {
 function createBrotliTransform({highWaterMark = 2**21} = {}) { 
 
   function _transform(chunk, encoding, callback) {
-    this.push(blib.decompress(chunk));
+    this.push(decompressBrotli(chunk));
     callback();
   }  
 
