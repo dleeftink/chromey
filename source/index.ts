@@ -1,6 +1,13 @@
 // @ts-nocheck
 
-import { access, createWriteStream, existsSync, exists, mkdirSync, symlink } from 'node:fs';
+import {
+  access,
+  createWriteStream,
+  existsSync,
+  exists,
+  mkdirSync,
+  symlink,
+} from 'node:fs';
 import { IncomingMessage } from 'node:http';
 import LambdaFS from './lambdafs';
 import { join } from 'node:path';
@@ -9,7 +16,7 @@ import { downloadAndExtract, isValidUrl } from './helper';
 
 import * as BrowserFS from 'browserfs';
 
-// (window as any).global = window; 
+// (window as any).global = window;
 
 BrowserFS.install(window);
 
@@ -21,7 +28,7 @@ BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('ran at: ', 1939)
 })*/
 
-console.log('ran at: ', 1536)
+console.log('ran at: ', 1552);
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
@@ -56,7 +63,11 @@ interface Viewport {
   hasTouch?: boolean;
 }
 
-if ( process.env.AWS_EXECUTION_ENV !== undefined && /^AWS_Lambda_nodejs(?:14|16|18)[.]x$/.test(process.env.AWS_EXECUTION_ENV) === true) {
+if (
+  process.env.AWS_EXECUTION_ENV !== undefined &&
+  /^AWS_Lambda_nodejs(?:14|16|18)[.]x$/.test(process.env.AWS_EXECUTION_ENV) ===
+    true
+) {
   if (process.env.FONTCONFIG_PATH === undefined) {
     process.env.FONTCONFIG_PATH = '/tmp/aws';
   }
@@ -64,16 +75,18 @@ if ( process.env.AWS_EXECUTION_ENV !== undefined && /^AWS_Lambda_nodejs(?:14|16|
   if (process.env.LD_LIBRARY_PATH === undefined) {
     process.env.LD_LIBRARY_PATH = '/tmp/aws/lib';
   } else if (process.env.LD_LIBRARY_PATH.startsWith('/tmp/aws/lib') !== true) {
-    process.env.LD_LIBRARY_PATH = [...new Set(['/tmp/aws/lib', ...process.env.LD_LIBRARY_PATH.split(':')])].join(':');
+    process.env.LD_LIBRARY_PATH = [
+      ...new Set(['/tmp/aws/lib', ...process.env.LD_LIBRARY_PATH.split(':')]),
+    ].join(':');
   }
 }
 
 function existsAsync(path) {
-  return new Promise(function(resolve, reject){
-    exists(path, function(exists){
+  return new Promise(function (resolve, reject) {
+    exists(path, function (exists) {
       resolve(exists);
-    })
-  })
+    });
+  });
 }
 
 class Chromium {
@@ -92,7 +105,7 @@ class Chromium {
       process.env.HOME = '/tmp';
     }
 
-    if (await existsAsync(`${process.env.HOME}/.fonts`) !== true) {
+    if ((await existsAsync(`${process.env.HOME}/.fonts`)) !== true) {
       mkdirSync(`${process.env.HOME}/.fonts`);
     }
 
@@ -102,9 +115,11 @@ class Chromium {
       }
 
       const url = new URL(input);
-      const output = `${process.env.HOME}/.fonts/${url.pathname.split('/').pop()}`;
+      const output = `${process.env.HOME}/.fonts/${url.pathname
+        .split('/')
+        .pop()}`;
 
-      if (await existsAsync(output) === true) {
+      if ((await existsAsync(output)) === true) {
         return resolve(output.split('/').pop() as string);
       }
 
@@ -115,11 +130,14 @@ class Chromium {
           }
 
           symlink(url.pathname, output, (error) => {
-            return error != null ? reject(error) : resolve(url.pathname.split('/').pop() as string);
+            return error != null
+              ? reject(error)
+              : resolve(url.pathname.split('/').pop() as string);
           });
         });
       } else {
-        let handler = url.protocol === 'http:' ? require('http').get : require('https').get;
+        let handler =
+          url.protocol === 'http:' ? require('http').get : require('https').get;
 
         handler(input, (response: IncomingMessage) => {
           if (response.statusCode !== 200) {
@@ -133,10 +151,12 @@ class Chromium {
           });
 
           response.on('data', (chunk) => {
+            console.log('downloading ... ');
             stream.write(chunk);
           });
 
           response.once('end', () => {
+            console.log('donwload finished');
             stream.end(() => {
               return resolve(url.pathname.split('/').pop() as string);
             });
@@ -213,7 +233,7 @@ class Chromium {
     /**
      * If the `chromium` binary already exists in /tmp/chromium, return it.
      */
-    if (await existsAsync('/tmp/chromium') === true) {
+    if ((await existsAsync('/tmp/chromium')) === true) {
       return Promise.resolve('/tmp/chromium');
     }
 
@@ -239,7 +259,12 @@ class Chromium {
       LambdaFS.inflate(`${input}/swiftshader.tar.br`),
     ];
 
-    if (process.env.AWS_EXECUTION_ENV !== undefined && /^AWS_Lambda_nodejs(?:14|16|18)[.]x$/.test(process.env.AWS_EXECUTION_ENV) === true) {
+    if (
+      process.env.AWS_EXECUTION_ENV !== undefined &&
+      /^AWS_Lambda_nodejs(?:14|16|18)[.]x$/.test(
+        process.env.AWS_EXECUTION_ENV
+      ) === true
+    ) {
       promises.push(LambdaFS.inflate(`${input}/aws.tar.br`));
     }
 
@@ -253,10 +278,13 @@ class Chromium {
    * False is returned if Serverless environment variables `IS_LOCAL` or `IS_OFFLINE` are set.
    */
   static get headless() {
-    if (process.env.IS_LOCAL !== undefined || process.env.IS_OFFLINE !== undefined) {
+    if (
+      process.env.IS_LOCAL !== undefined ||
+      process.env.IS_OFFLINE !== undefined
+    ) {
       return false;
     }
-    if (process.env.NODE_ENV === "test") {
+    if (process.env.NODE_ENV === 'test') {
       return true;
     }
     const environments = [
@@ -272,7 +300,7 @@ class Chromium {
 
 //console.log(new Chromium())
 
-export = Chromium
+export = Chromium;
 //export = {
 //  Chromium: new Chromium()
 //}
