@@ -7,8 +7,7 @@ import { extract } from 'tar-fs';
 import { /*createBrotliDecompress,*/ createUnzip } from 'node:zlib';
 
 import { decompress } from 'brotli-compress/js'
-
-
+import { Transform } from 'stream'; 
 
 function existsAsync(path) {
   return new Promise(function(resolve, reject){
@@ -16,6 +15,26 @@ function existsAsync(path) {
       resolve(exists);
     })
   })
+}
+
+function createBrotliTransform({highWaterMark = 2**21} = {}) { 
+
+  function _transform(chunk, encoding, callback) {
+    this.push(blib.decompress(chunk));
+    callback();
+  }  
+
+  function _flush(callback) {
+    callback()
+  }
+  
+  const tfm = new Transform({
+    highWaterMark,
+    transform: _transform,
+    flush: _flush
+  })
+
+  return tfm
 }
 
 class LambdaFS {
@@ -65,9 +84,8 @@ class LambdaFS {
 
       if (/(?:br|gz)$/i.test(filePath) === true) {
         source.pipe(/br$/i.test(filePath) 
-          ? (buf,clb=(d)=>d)=>clb(decompress(buf)) 
+          ? createBrotliTransform()
             // createBrotliDecompress({ chunkSize: 2 ** 21 }) 
-            // expects readable-stream transform
           : createUnzip({ chunkSize: 2 ** 21 })).pipe(target);
       } else {
         source.pipe(target);

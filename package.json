@@ -31,6 +31,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "brotli-compress": "^1.3.3",
     "browserfs": "^1.4.3",
     "follow-redirects": "^1.15.2",
     "tar-fs": "^2.1.1"
@@ -44,7 +45,6 @@
     "@types/node": "^18.11.18",
     "@types/tar-fs": "^2.0.1",
     "babel-loader": "^9.1.2",
-    "brotli-compress": "^1.3.3",
     "browserify-fs": "^1.0.0",
     "browserify-zlib": "^0.2.0",
     "clean-modules": "^2.0.6",
