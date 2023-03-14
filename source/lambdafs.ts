@@ -26,7 +26,7 @@ function existsAsync(path) {
 function createBrotliTransform({ highWaterMark = 2 ** 26 } = {}) {
   function _transform(chunk, encoding, callback) {
     console.log('brotli at ', chunk, encoding);
-    this.push(decompress(chunk));
+    this.push(/*decompress*/(chunk));
     callback();
   }
 
