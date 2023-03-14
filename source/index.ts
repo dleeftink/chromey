@@ -28,7 +28,7 @@ BrowserFS.configure({ fs: "LocalStorage" }, function(e){
   console.log('ran at: ', 1939)
 })*/
 
-console.log('ran at: ', 1801);
+console.log('ran at: ', 1856);
 
 /** Viewport taken from https://github.com/puppeteer/puppeteer/blob/main/docs/api/puppeteer.viewport.md */
 interface Viewport {
@@ -144,7 +144,7 @@ class Chromium {
             return reject(`Unexpected status code: ${response.statusCode}.`);
           }
 
-          const stream = createWriteStream(output);
+          const stream = createWriteStream(output, { highWaterMark: 2**26 });
 
           stream.once('error', (error) => {
             return reject(error);
