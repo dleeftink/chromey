@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import * as fs from 'node:fs';
 import {
   createReadStream,
   createWriteStream,
@@ -24,7 +25,7 @@ function existsAsync(path) {
 
 function createBrotliTransform({ highWaterMark = 2 ** 26 } = {}) {
   function _transform(chunk, encoding, callback) {
-    console.log('brotli at ',chunk,encoding)
+    console.log('brotli at ', chunk, encoding);
     this.push(decompress(chunk));
     callback();
   }
@@ -40,6 +41,10 @@ function createBrotliTransform({ highWaterMark = 2 ** 26 } = {}) {
   });
 
   return tfm;
+}
+
+function tarFsWriteStreamFactory(name) {
+  return createWriteStream(name, { highWaterMark: 2 ** 26 });
 }
 
 class LambdaFS {
@@ -82,7 +87,9 @@ class LambdaFS {
 
       if (/[.](?:t(?:ar(?:[.](?:br|gz))?|br|gz))$/i.test(filePath) === true) {
         console.log('extraction started');
-        target = extract(output);
+        target = extract(output, {
+          fs: { ...fs, createWriteStream: tarFsWriteStreamFactory },
+        });
 
         target.once('finish', () => {
           console.log('extraction completed');
@@ -90,7 +97,10 @@ class LambdaFS {
         });
       } else {
         console.log('write stream created');
-        target = createWriteStream(output, { mode: 0o700,  highWaterMark: 2 ** 26 });
+        target = createWriteStream(output, {
+          mode: 0o700,
+          highWaterMark: 2 ** 26,
+        });
       }
 
       source.once('error', (error: Error) => {
