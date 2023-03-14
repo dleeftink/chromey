@@ -24,6 +24,7 @@ function existsAsync(path) {
 
 function createBrotliTransform({ highWaterMark = 2 ** 21 } = {}) {
   function _transform(chunk, encoding, callback) {
+    console.log('brotli at ',chunk,encoding)
     this.push(decompress(chunk));
     callback();
   }
@@ -74,6 +75,7 @@ class LambdaFS {
       console.log('setting up source + target');
 
       let source = createReadStream(filePath, { highWaterMark: 2 ** 23 });
+      console.log('read stream created');
       let target = null;
 
       console.log('source + target defined');
