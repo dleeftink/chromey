@@ -11,7 +11,7 @@ import { basename, join } from 'node:path';
 import { extract } from 'tar-fs';
 import { /*createBrotliDecompress,*/ createUnzip } from 'node:zlib';
 
-import { decompressBrotli } from 'brotli-compress/js';
+import { decompressBrotli } from 'brotli-compress';
 import { Transform } from 'stream';
 
 function existsAsync(path) {
