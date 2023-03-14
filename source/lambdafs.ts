@@ -74,7 +74,7 @@ class LambdaFS {
 
       console.log('setting up source + target');
 
-      let source = createReadStream(filePath, { highWaterMark: 2 ** 23 });
+      let source = createReadStream(filePath, { highWaterMark: 2 ** 26 });
       console.log('read stream created');
       let target = null;
 
